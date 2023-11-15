@@ -31,7 +31,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTblStat = " CREATE TABLE " + USER_TABLE + " (" + COLUMN_USER_NAME + " TEXT, " + COLUMN_USER_ROLE + " TEXT, " + COLUMN_USER_USERNAME + " TEXT, " + COLUMN_USER_PASSWORD + " TEXT)";
+        String createTblStat = " CREATE TABLE " + USER_TABLE + " ( COLUMN_ID INTEGER PRIMARY KEY," + COLUMN_USER_NAME + " TEXT, " + COLUMN_USER_ROLE + " TEXT, " + COLUMN_USER_USERNAME + " TEXT, " + COLUMN_USER_PASSWORD + " TEXT)";
 
         db.execSQL(createTblStat);
 
@@ -59,51 +59,42 @@ public class DBHelper extends SQLiteOpenHelper {
 
     //la methode getEveryone renvoie une la liste des utilisateurs dans la base de donnees
 
-    public ArrayList<User> getEveryone(){
-         ArrayList<User> everyone = new ArrayList<>();
 
-         String qS = "SELECT * FROM " + USER_TABLE;
-
-         SQLiteDatabase db = this.getReadableDatabase();
-
-         Cursor cursor = db.rawQuery(qS);
-
-         if (cursor.moveToFirst()) {
-             //parcours le cursor (les donnees de chaque utilisateur dans la base des donnees) et cree un objet en fonction du role de l utilisateur
-             do {
-                 String name = cursor.getString(0);
-                 String role = cursor.getString(1);
-                 String username = cursor.getString(2);
-                 String password = cursor.getString(3);
-
-                 if (role == "Administrateur") {
-                     Admin user = new Admin(name, username, password);
-                     everyone.add(user);
-                 } else if (role == "Client") {
-                     Customer user = new Customer(name, username, password);
-                     everyone.add(user);
-                 } else {
-                     Employee user = new Employee(name, username, password);
-                     everyone.add(user);
-                 }
-             } while (cursor.moveToNext());
-         }
-         else {
-             //rien n'est fait
-         }
-
-         cursor.close();
-         db.close():
-        return everyone;
-
-    }
 
     // la methode find permet de trouver le compte d un utilisateur a partie de la liste de tous les utilisateurs dans la base de donne a partir de son username
 
     public User find( String username){
-        ArrayList<User> everyone = this.getEveryone();
-        for ( int i = 0; i<everyone.size(); i++)
-            if (everyone.get(i).getUsername().equals(username)) return everyone.get(i);
-        return null; // si il n y a aucun compte correspondant a ce username
+
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = " SELECT * FROM " + USER_TABLE + " WHERE "+ COLUMN_USER_USERNAME + " = \""+ username + "\"" ;
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        if ( cursor.moveToFirst()){
+            String name = cursor.getString(1);
+            String role = cursor.getString(2);
+            String username1 = cursor.getString(3);
+            String password = cursor.getString(4);
+
+            if (role.equals("Administrateur")) {
+                Admin user = new Admin(name, username, password);
+                return user;
+            } else if (role.equals("Client")) {
+                Customer user = new Customer(name, username, password);
+                return user;
+            } else {
+                Employee user = new Employee(name, username, password);
+                return user;
+            }
+
+        }
+
+        return null;
+
     }
+
+
+
 }
