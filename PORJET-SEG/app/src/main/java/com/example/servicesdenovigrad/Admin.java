@@ -1,5 +1,8 @@
 package com.example.servicesdenovigrad;
 
+import android.annotation.SuppressLint;
+
+@SuppressLint("ParcelCreator")
 public class Admin extends User{
 
     //le constructeur

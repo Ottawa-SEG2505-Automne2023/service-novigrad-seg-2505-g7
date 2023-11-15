@@ -1,8 +1,11 @@
 package com.example.servicesdenovigrad;
 
+import android.os.Parcel;
 import android.os.Parcelable;
 
-public class User extends Parcelable {
+import androidx.annotation.NonNull;
+
+public class User implements Parcelable {
 
     // les attributs de l utilisateur
 
@@ -22,6 +25,25 @@ public class User extends Parcelable {
 
     //les getteurs
 
+
+    protected User(Parcel in) {
+        role = in.readString();
+        name = in.readString();
+        username = in.readString();
+        password = in.readString();
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 
     public String getName() {
         return name;
@@ -57,5 +79,18 @@ public class User extends Parcelable {
     public boolean checkPS (String password){
         boolean isChecked = this.password.equals(password);
         return isChecked;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeString(role);
+        dest.writeString(name);
+        dest.writeString(username);
+        dest.writeString(password);
     }
 }
