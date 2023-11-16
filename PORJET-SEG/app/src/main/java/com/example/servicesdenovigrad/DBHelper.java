@@ -31,7 +31,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTblStat = " CREATE TABLE " + USER_TABLE + " (" + COLUMN_USER_NAME + " TEXT, " + COLUMN_USER_ROLE + " TEXT, " + COLUMN_USER_USERNAME + " TEXT, " + COLUMN_USER_PASSWORD + " TEXT)";
+        String createTblStat = " CREATE TABLE " + USER_TABLE + " ( COLUMN_ID INTEGER PRIMARY KEY," + COLUMN_USER_NAME + " TEXT, " + COLUMN_USER_ROLE + " TEXT, " + COLUMN_USER_USERNAME + " TEXT, " + COLUMN_USER_PASSWORD + " TEXT)";
 
         db.execSQL(createTblStat);
 
@@ -59,6 +59,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
 
+<<<<<<< HEAD
 
 
     // la methode find permet de trouver le compte d un utilisateur a partie de la liste de tous les utilisateurs dans la base de donne a partir de son username
@@ -71,6 +72,21 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, null);
 
         if (cursor.moveToFirst()) {
+=======
+
+    // la methode find permet de trouver le compte d un utilisateur a partie de la liste de tous les utilisateurs dans la base de donne a partir de son username
+
+    public User find( String username){
+
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = " SELECT * FROM " + USER_TABLE + " WHERE "+ COLUMN_USER_USERNAME + " = \""+ username + "\"" ;
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        if ( cursor.moveToFirst()){
+>>>>>>> 536b468264e3591ebdc578a0cdc5f34a9a507114
             String name = cursor.getString(1);
             String role = cursor.getString(2);
             String username1 = cursor.getString(3);
@@ -86,7 +102,18 @@ public class DBHelper extends SQLiteOpenHelper {
                 Employee user = new Employee(name, username, password);
                 return user;
             }
+<<<<<<< HEAD
         }
         return null;
+=======
+
+        }
+
+        return null;
+
+>>>>>>> 536b468264e3591ebdc578a0cdc5f34a9a507114
     }
+
+
+
 }

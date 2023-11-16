@@ -15,9 +15,13 @@ public class MainActivity extends AppCompatActivity {
 
     DBHelper db = new DBHelper( MainActivity.this );
 
+<<<<<<< HEAD
     Admin user1 = new Admin ("Hilaire", "hkala", "Enfin07");
 
 
+=======
+    Admin user1 = new Admin("Hilaire", "hkala", "Enfin07");
+>>>>>>> 536b468264e3591ebdc578a0cdc5f34a9a507114
 
 
 
@@ -30,11 +34,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+<<<<<<< HEAD
         db.add( user1);
 
         User user2;
         user2 = null;
 
+=======
+        db.add( user1 );
+
+        User user2;
+        user2 = null;
+>>>>>>> 536b468264e3591ebdc578a0cdc5f34a9a507114
 
 
         try{
@@ -46,9 +57,13 @@ public class MainActivity extends AppCompatActivity {
 
         txt_username = (TextView) findViewById(R.id.txt_userName);
         txt_password = (TextView) findViewById(R.id.txt_ps);
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 536b468264e3591ebdc578a0cdc5f34a9a507114
 
+        
         // enregistre le compte nouvellement cree dans la base de donnees
         if ( user2 != null){
             db.add(user2);
