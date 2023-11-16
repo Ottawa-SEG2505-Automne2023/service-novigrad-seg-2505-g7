@@ -1,10 +1,14 @@
 package com.example.servicesdenovigrad;
 
+import android.os.Parcel;
 import android.os.Parcelable;
 
-public class User extends Parcelable {
+import androidx.annotation.NonNull;
+
+public  class User implements Parcelable {
 
     // les attributs de l utilisateur
+
 
     protected String role;
     private String name;
@@ -18,6 +22,43 @@ public class User extends Parcelable {
         this.username = username;
         this.password = password;
     }
+
+
+
+        // Parcelable implementation
+        protected User(Parcel in) {
+            role = in.readString();
+            name = in.readString();
+            username = in.readString();
+            password = in.readString();
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(role);
+            dest.writeString(name);
+            dest.writeString(username);
+            dest.writeString(password);
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        public static final Creator<User> CREATOR = new Creator<User>() {
+            @Override
+            public User createFromParcel(Parcel in) {
+                return new User(in);
+            }
+
+            @Override
+            public User[] newArray(int size) {
+                return new User[size];
+            }
+        };
+
+
 
 
     //les getteurs
@@ -58,4 +99,6 @@ public class User extends Parcelable {
         boolean isChecked = this.password.equals(password);
         return isChecked;
     }
+
+
 }

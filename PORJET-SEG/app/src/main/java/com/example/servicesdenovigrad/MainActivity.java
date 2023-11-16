@@ -8,12 +8,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    DBHelper db = new DBHelper( MainActivity.this );
+
+    Admin user1 = new Admin ("Hilaire", "hkala", "Enfin07");
+
+
+
+
+
     Button connexion, create;
-    EditText txt_username, txt_password;
+    TextView txt_username, txt_password;
 
 
     @Override
@@ -21,27 +30,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        User user1, userdefault;
-        user1 = null;
+        db.add( user1);
 
-        userdefault = new Admin ("Hilaire", "hk42", "Enfin");
+        User user2;
+        user2 = null;
+
+
 
         try{
-            user1 = getIntent().getExtras().getParcelable("user_info");
+            user2 = getIntent().getExtras().getParcelable("user_info");
         }
         catch(Exception e){
 
         }
 
-        txt_username = findViewById(R.id.txt_userName);
-        txt_password = findViewById(R.id.txt_ps);
+        txt_username = (TextView) findViewById(R.id.txt_userName);
+        txt_password = (TextView) findViewById(R.id.txt_ps);
 
-        DBHelper db = new DBHelper(MainActivity.this);
-        db.add(userdefault);
+
 
         // enregistre le compte nouvellement cree dans la base de donnees
-        if ( user1 != null){
-            db.add(user1);
+        if ( user2 != null){
+            db.add(user2);
         }
 
 
