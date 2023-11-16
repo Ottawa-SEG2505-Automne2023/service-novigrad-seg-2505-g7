@@ -5,11 +5,7 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
-<<<<<<< HEAD
 public  class User implements Parcelable {
-=======
-public class User implements Parcelable {
->>>>>>> 536b468264e3591ebdc578a0cdc5f34a9a507114
 
     // les attributs de l utilisateur
 
@@ -29,50 +25,25 @@ public class User implements Parcelable {
 
 
 
-        // Parcelable implementation
-        protected User(Parcel in) {
-            role = in.readString();
-            name = in.readString();
-            username = in.readString();
-            password = in.readString();
-        }
-
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            dest.writeString(role);
-            dest.writeString(name);
-            dest.writeString(username);
-            dest.writeString(password);
-        }
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        public static final Creator<User> CREATOR = new Creator<User>() {
-            @Override
-            public User createFromParcel(Parcel in) {
-                return new User(in);
-            }
-
-            @Override
-            public User[] newArray(int size) {
-                return new User[size];
-            }
-        };
-
-
-
-
-    //les getteurs
-
-
+    // Parcelable implementation
     protected User(Parcel in) {
         role = in.readString();
         name = in.readString();
         username = in.readString();
         password = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(role);
+        dest.writeString(name);
+        dest.writeString(username);
+        dest.writeString(password);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {
@@ -86,6 +57,12 @@ public class User implements Parcelable {
             return new User[size];
         }
     };
+
+
+
+
+    //les getteurs
+
 
     public String getName() {
         return name;
@@ -123,20 +100,5 @@ public class User implements Parcelable {
         return isChecked;
     }
 
-<<<<<<< HEAD
 
-=======
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(@NonNull Parcel dest, int flags) {
-        dest.writeString(role);
-        dest.writeString(name);
-        dest.writeString(username);
-        dest.writeString(password);
-    }
->>>>>>> 536b468264e3591ebdc578a0cdc5f34a9a507114
 }

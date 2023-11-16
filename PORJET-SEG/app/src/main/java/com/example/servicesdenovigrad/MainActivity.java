@@ -15,13 +15,9 @@ public class MainActivity extends AppCompatActivity {
 
     DBHelper db = new DBHelper( MainActivity.this );
 
-<<<<<<< HEAD
     Admin user1 = new Admin ("Hilaire", "hkala", "Enfin07");
 
 
-=======
-    Admin user1 = new Admin("Hilaire", "hkala", "Enfin07");
->>>>>>> 536b468264e3591ebdc578a0cdc5f34a9a507114
 
 
 
@@ -34,18 +30,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-<<<<<<< HEAD
         db.add( user1);
 
         User user2;
         user2 = null;
 
-=======
-        db.add( user1 );
-
-        User user2;
-        user2 = null;
->>>>>>> 536b468264e3591ebdc578a0cdc5f34a9a507114
 
 
         try{
@@ -57,13 +46,9 @@ public class MainActivity extends AppCompatActivity {
 
         txt_username = (TextView) findViewById(R.id.txt_userName);
         txt_password = (TextView) findViewById(R.id.txt_ps);
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 536b468264e3591ebdc578a0cdc5f34a9a507114
 
-        
         // enregistre le compte nouvellement cree dans la base de donnees
         if ( user2 != null){
             db.add(user2);
@@ -79,19 +64,19 @@ public class MainActivity extends AppCompatActivity {
         connexion.setOnClickListener(new View.OnClickListener() {
             public void onClick (View v){
                 try{
-                User user = db.find(txt_username.getText().toString());
-                if (user == null) {
-                    Toast.makeText(MainActivity.this, "Compte inexistant, veuillez creer un nouveau compte", Toast.LENGTH_SHORT).show();
-                } else if (user.checkPS(txt_password.getText().toString())) {
-                    i1.putExtra("user_info", user);
-                    startActivity(i1);
-                } else {
-                    Toast.makeText(MainActivity.this, "Mot de passe incorrect", Toast.LENGTH_SHORT).show();
-                }
-            } catch ( Exception e){
+                    User user = db.find(txt_username.getText().toString());
+                    if (user == null) {
+                        Toast.makeText(MainActivity.this, "Compte inexistant, veuillez creer un nouveau compte", Toast.LENGTH_SHORT).show();
+                    } else if (user.checkPS(txt_password.getText().toString())) {
+                        i1.putExtra("user_info", user);
+                        startActivity(i1);
+                    } else {
+                        Toast.makeText(MainActivity.this, "Mot de passe incorrect", Toast.LENGTH_SHORT).show();
+                    }
+                } catch ( Exception e){
                     Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
                 }
-        }
+            }
         });
 
         create = (Button) findViewById(R.id.btn_cree);
