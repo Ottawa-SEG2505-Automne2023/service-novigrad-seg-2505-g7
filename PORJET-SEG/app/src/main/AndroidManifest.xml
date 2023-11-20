@@ -13,6 +13,24 @@
         android:theme="@style/Theme.ServicesDeNovigrad"
         tools:targetApi="31">
         <activity
+            android:name=".AdminParkingPermit"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerParkingPermit"
+            android:exported="false" />
+        <activity
+            android:name=".AdminIDCard"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerIDCard"
+            android:exported="false" />
+        <activity
+            android:name=".AdminDriverLicense"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerDriverLicense"
+            android:exported="false" />
+        <activity
             android:name=".Activity3"
             android:exported="false" />
         <activity
