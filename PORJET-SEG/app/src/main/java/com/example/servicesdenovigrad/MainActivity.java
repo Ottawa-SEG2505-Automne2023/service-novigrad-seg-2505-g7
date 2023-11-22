@@ -45,26 +45,43 @@ public class MainActivity extends AppCompatActivity {
 
         DBHelper.addUser(user1, DB.child("Users"));
 
+        //Creation des 3 premiers services et disponibles pour le Client
+
+        ServiceNov s1, s2, s3;
+
+        s1 = new ServiceNov ("Demande de permis de conduire",
+                "ID Card",
+                "Certificat de conduite",
+                "Rapport physique");
+
+        s2 = new ServiceNov ( "Demande de Carte ID",
+                "Certificat de naissance",
+                "Passeport",
+                "Preuve de logement");
+
+        s3 = new ServiceNov ( "Demande de Permis de parking",
+                "Permis de conduire",
+                "Documents du vehicule",
+                "Preuve d emploi");
+
+        DBHelper.addService(s1, DB.child("Services"));
+        DBHelper.addService(s2, DB.child("Services"));
+        DBHelper.addService(s3, DB.child("Services"));
+
 
         User user2;
         user2 = null;
-
-
-
-      
 
         txt_username = (TextView) findViewById(R.id.txt_userName);
         txt_password = (TextView) findViewById(R.id.txt_ps);
 
 
-
-
 // D ici vers le choix de Service****************
-        Intent i1 = new Intent(MainActivity.this, Activity3.class);
+        Intent i1 = new Intent(MainActivity.this, Activity3.class); // de Gouled
 // D ici vers la creation de compte  *************
         Intent i2 = new Intent( MainActivity.this, Activity2.class);
-// D ici vers la page Administrateur du choix de l action a faire***************
-        Intent i3;
+// D ici vers la page Administrateur du choix de l action a faire
+        Intent i3 = new Intent(MainActivity.this, AdminParkingPermit.class);
 
 
 
@@ -78,7 +95,13 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Compte inexistant, veuillez creer un nouveau compte", Toast.LENGTH_SHORT).show();
                     } else if (user.checkPS(txt_password.getText().toString())) {
                         DBHelper.addUser(user, DB.child("CurrentUser"));
-                        startActivity(i1);//****************
+                        if (user.getRole() == "Administrateur"){
+                            startActivity(i3);
+                        }
+                        else if (user.getRole() == "Client"){
+                            // Activite de Gouled *********************
+                        }
+                        //**************** un atre else if pour l Employee plus tard
                     } else {
                         Toast.makeText(MainActivity.this, "Mot de passe incorrect", Toast.LENGTH_SHORT).show();
                     }

@@ -36,6 +36,11 @@ public class Activity2 extends AppCompatActivity {
         username = (EditText) findViewById(R.id.txt_Username);
         password = (EditText) findViewById(R.id.txt_Password);
 
+        // L intent qui mene au choix du service a demander apres creation d un compte Client
+
+        Intent i = new Intent ( Activity2.this, CustomerIDCard.class); // *******de Gouled choix de service client
+        Intent i1 = new Intent ( Activity2.this, AdminParkingPermit.class);
+
 
 
 
@@ -53,8 +58,15 @@ public class Activity2 extends AppCompatActivity {
                          user = new Employee(name.getText().toString(), username.getText().toString(), password.getText().toString());
                     }
                     DBHelper.addUser(user, DB.child("Users"));
+                    DBHelper.addUser(user, DB.child("CurrentUser"));
+
                     Toast.makeText(Activity2.this, "Succes de creation de compte", Toast.LENGTH_SHORT).show();
-                    startActivity(i);
+                    if (user.getRole() == "Client") {
+                        startActivity(i);
+                    }
+                    else if (user.getRole() == "Administrateur"){
+                        startActivity(i1);
+                    }
                 }
                 catch( Exception e){
                     Toast.makeText(Activity2.this, "Error", Toast.LENGTH_SHORT).show();
