@@ -28,8 +28,8 @@ public class AdminDriverLicense extends AppCompatActivity {
 
         DB = FirebaseDatabase.getInstance().getReference();
 
-        Sname = (EditText) findViewById(R.id.txt_sname); // A determiner apres le push de Yvan
-        next = (Button) findViewById(R.id.btn_suivant); // IDEM
+        Sname = (EditText) findViewById(R.id.txt_Sname);
+        next = (Button) findViewById(R.id.btn_next);
 
         next.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){

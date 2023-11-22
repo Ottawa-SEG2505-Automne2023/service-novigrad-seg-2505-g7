@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 "Passeport",
                 "Preuve de logement");
 
-        s3 = new ServiceNov ( "Demande de Permis de parking",
+        s3 = new ServiceNov ( "Demande de permis de parking",
                 "Permis de conduire",
                 "Documents du vehicule",
                 "Preuve d emploi");

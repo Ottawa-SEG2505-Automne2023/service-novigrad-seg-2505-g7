@@ -146,4 +146,39 @@ public class DBHelper  {
 
         db.child(e.getName()).removeValue();
     }
+
+    public static User getCurrentUser(DatabaseReference db){
+
+        User[] userlist = new User[1];
+
+        db.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Map<String, Object> data;
+                for (DataSnapshot dt : snapshot.getChildren()) {
+                    data = dt.getValue(HashMap.class);
+                    if (data.get("role") == "Administrateur") {
+                        userlist[0] = new Admin(data.get("name").toString(),
+                                data.get("UserName").toString(),
+                                data.get("password").toString());
+                    } else if (data.get("role") == "Client") {
+                        userlist[0] = new Customer(data.get("name").toString(),
+                                data.get("UserName").toString(),
+                                data.get("password").toString());
+                    } else {
+                        userlist[0] = new Employee(data.get("name").toString(),
+                                data.get("UserName").toString(),
+                                data.get("password").toString());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        return userlist[0];
+    }
 }
