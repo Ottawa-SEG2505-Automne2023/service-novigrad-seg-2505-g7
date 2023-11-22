@@ -1,6 +1,9 @@
 package com.example.servicesdenovigrad;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 
 import com.google.firebase.database.DataSnapshot;
@@ -9,7 +12,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 // La classe qui permet a l Administrateur de modifier ou supprimer un Service
-public class Modificator {
+public class Modificator implements Parcelable {
 
     private int action; // 0 pour modifier et 1 pour retirer
 
@@ -25,9 +28,31 @@ public class Modificator {
         action = act;
     }
 
+    protected Modificator(Parcel in) {
+        action = in.readInt();
+        Serv_name = in.readString();
+        firstD = in.readString();
+        secondD = in.readString();
+        thirdD = in.readString();
+    }
+
+    public static final Creator<Modificator> CREATOR = new Creator<Modificator>() {
+        @Override
+        public Modificator createFromParcel(Parcel in) {
+            return new Modificator(in);
+        }
+
+        @Override
+        public Modificator[] newArray(int size) {
+            return new Modificator[size];
+        }
+    };
+
     public String getServ_name(){
         return Serv_name;
     }
+
+    public int getAct(){ return action; }
 
     public void setServ_name(String serv_name) {
         Serv_name = serv_name;
@@ -57,5 +82,19 @@ public class Modificator {
        }
 
        return true; // la modification a ete effectue
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeInt(action);
+        dest.writeString(Serv_name);
+        dest.writeString(firstD);
+        dest.writeString(secondD);
+        dest.writeString(thirdD);
     }
 }
