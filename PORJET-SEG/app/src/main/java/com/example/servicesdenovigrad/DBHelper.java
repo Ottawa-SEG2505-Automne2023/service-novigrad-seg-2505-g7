@@ -10,83 +10,140 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import androidx.annotation.NonNull;
+
 import com.example.servicesdenovigrad.Admin;
 import com.example.servicesdenovigrad.Customer;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-public class DBHelper extends SQLiteOpenHelper {
-    public static final String USER_TABLE = "USER_TABLE";
+public class DBHelper  {
 
-    public static final String COLUMN_USER_ROLE = "USER_ROLE";
-    public static final String COLUMN_USER_USERNAME = "USER_USERNAME";
-    public static final String COLUMN_USER_PASSWORD = "USER_PASSWORD";
-    public static final String COLUMN_USER_NAME = "USER_NAME";
+    public static void addUser(User user, DatabaseReference db){
+        Map<String, String> contentuser = new HashMap<>();
+        contentuser.put("UserName", user.getUsername());
+        contentuser.put("name", user.getName());
+        contentuser.put("password", user.getPassword());
+        contentuser.put("role", user.getRole());
 
-    // le constructeur
-
-    public DBHelper ( Context context ){
-        super ( context, "user.db", null, 1 );
+        db.child(user.getUsername()).setValue(contentuser);
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        String createTblStat = " CREATE TABLE " + USER_TABLE + " (" + COLUMN_USER_NAME + " TEXT, " + COLUMN_USER_ROLE + " TEXT, " + COLUMN_USER_USERNAME + " TEXT, " + COLUMN_USER_PASSWORD + " TEXT)";
+    public static void addService(ServiceNov e, DatabaseReference db){
+        Map<String, String> content = new HashMap<>();
+        content.put("ServiceName", e.getName());
+        content.put("FullName", e.getFullname());
+        content.put("Adresse", e.getAddress());
+        content.put("Email", e.getEmail());
+        content.put("Phone", e.getPhone());
+        content.put("First doc", e.getFirstD());
+        content.put("Second doc", e.getSecondD());
+        content.put("Third doc", e.getThirdD());
 
-        db.execSQL(createTblStat);
-
+        db.child(e.getName()).setValue(content);
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    public static void updateService(ServiceNov e, DatabaseReference db){
+        Map<String, Object> content = new HashMap<>();
+        content.put("ServiceName", e.getName());
+        content.put("FullName", e.getFullname());
+        content.put("Adresse", e.getAddress());
+        content.put("Email", e.getEmail());
+        content.put("Phone", e.getPhone());
+        content.put("First doc", e.getFirstD());
+        content.put("Second doc", e.getSecondD());
+        content.put("Third doc", e.getThirdD());
 
+        db.child(e.getName()).updateChildren(content);
     }
 
-    //la methode add ajoute les donnees d un utilisateur dans la base de donnees
+    public static void updateUser(User user, DatabaseReference db){
+        Map<String, Object> contentuser = new HashMap<>();
+        contentuser.put("UserName", user.getUsername());
+        contentuser.put("name", user.getName());
+        contentuser.put("password", user.getPassword());
+        contentuser.put("role", user.getRole());
 
-    public boolean add (User user){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues cv = new ContentValues(); // cette classe permet de sotcker les elements par pair
-
-        cv.put(COLUMN_USER_NAME, user.getName());
-        cv.put(COLUMN_USER_ROLE, user.getRole());
-        cv.put(COLUMN_USER_USERNAME, user.getUsername());
-        cv.put(COLUMN_USER_PASSWORD, user.getPassword());
-
-        long insert = db.insert(USER_TABLE, null, cv);
-        return insert != -1;
+        db.child(user.getUsername()).updateChildren(contentuser);
     }
 
+    public static User getUser(String userName, DatabaseReference db) {
+
+        User[] userlist = new User[1];
 
 
 
 
-    // la methode find permet de trouver le compte d un utilisateur a partie de la liste de tous les utilisateurs dans la base de donne a partir de son username
+        db.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Map<String, Object> data;
+                for (DataSnapshot dt : snapshot.getChildren()) {
+                    data = dt.getValue(HashMap.class);
+                    if (data.get("UserName") == userName) {
+                        if (data.get("role") == "Administrateur") {
+                            userlist[0] = new Admin(data.get("name").toString(),
+                                    data.get("UserName").toString(),
+                                    data.get("password").toString());
+                        } else if (data.get("role") == "Client") {
+                            userlist[0] = new Customer(data.get("name").toString(),
+                                    data.get("UserName").toString(),
+                                    data.get("password").toString());
+                        } else {
+                            userlist[0] = new Employee(data.get("name").toString(),
+                                    data.get("UserName").toString(),
+                                    data.get("password").toString());
+                        }
+                    }
+                }
 
-    public User find( String username) {
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        String query = " SELECT * FROM " + USER_TABLE + " WHERE " + COLUMN_USER_USERNAME + " = \"" + username + "\"";
-
-        Cursor cursor = db.rawQuery(query, null);
-
-        if (cursor.moveToFirst()) {
-            String name = cursor.getString(1);
-            String role = cursor.getString(2);
-            String username1 = cursor.getString(3);
-            String password = cursor.getString(4);
-
-            if (role.equals("Administrateur")) {
-                Admin user = new Admin(name, username, password);
-                return user;
-            } else if (role.equals("Client")) {
-                Customer user = new Customer(name, username, password);
-                return user;
-            } else {
-                Employee user = new Employee(name, username, password);
-                return user;
             }
-        }
-        return null;
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        return userlist[0];
+    }
+
+    public static ServiceNov getService(String name, DatabaseReference db){
+
+        ServiceNov[] servicelist = new ServiceNov[1];
+
+        db.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Map<String, Object> data;
+                for (DataSnapshot dt : snapshot.getChildren()){
+                    data = dt.getValue(HashMap.class);
+                    if(data.get("ServiceName") == name){
+                        servicelist[0] = new ServiceNov(data.get("ServiceName").toString(),
+                                data.get("First doc").toString(),
+                                data.get("Second doc").toString(),
+                                data.get("Third doc").toString());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        return servicelist[0];
+    }
+
+    public static void deleteService(ServiceNov e, DatabaseReference db){
+
+        db.child(e.getName()).removeValue();
     }
 }

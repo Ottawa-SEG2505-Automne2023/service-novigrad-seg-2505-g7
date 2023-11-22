@@ -9,7 +9,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class Activity2 extends AppCompatActivity {
+
+    private DatabaseReference DB;
+
+ private User user;
 
     EditText name, role, username, password;
 
@@ -19,6 +26,8 @@ public class Activity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2);
+
+        DB = FirebaseDatabase.getInstance().getReference();
 
         //les  elements remplis par le createur d un compte
 
@@ -35,17 +44,15 @@ public class Activity2 extends AppCompatActivity {
         create.setOnClickListener(new View.OnClickListener() {
             public void onClick( View v){
                 try {
-                    Intent i = new Intent(Activity2.this, MainActivity.class);
-                    if (role.getText().toString().equals("Administrateur")) {
-                        Admin user = new Admin(name.getText().toString(), username.getText().toString(), password.getText().toString());
-                        i.putExtra("user_info", user);
+                    if (role.getText().toString() == "Administrateur") {
+                         user = new Admin(name.getText().toString(), username.getText().toString(), password.getText().toString());
                     } else if (role.getText().toString().equals("Client")) {
-                        Customer user = new Customer(name.getText().toString(), username.getText().toString(), password.getText().toString());
-                        i.putExtra("user_info", user);
+                         user = new Customer(name.getText().toString(), username.getText().toString(), password.getText().toString());
+                        
                     } else {
-                        Employee user = new Employee(name.getText().toString(), username.getText().toString(), password.getText().toString());
-                        i.putExtra("user_info", user);
+                         user = new Employee(name.getText().toString(), username.getText().toString(), password.getText().toString());
                     }
+                    DBHelper.addUser(user, DB.child("Users"));
                     Toast.makeText(Activity2.this, "Succes de creation de compte", Toast.LENGTH_SHORT).show();
                     startActivity(i);
                 }
