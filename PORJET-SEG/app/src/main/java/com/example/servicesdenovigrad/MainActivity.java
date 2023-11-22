@@ -11,11 +11,22 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity {
 
-    DBHelper db = new DBHelper( MainActivity.this );
+    private DatabaseReference DB;
+
+
 
     Admin user1 = new Admin ("Hilaire", "hkala", "Enfin07");
+
+    User currentuser;
 
 
 
@@ -30,46 +41,44 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        db.add( user1);
+        DB = FirebaseDatabase.getInstance().getReference();
+
+        DBHelper.addUser(user1, DB.child("Users"));
+
 
         User user2;
         user2 = null;
 
 
 
-        try{
-            user2 = getIntent().getExtras().getParcelable("user_info");
-        }
-        catch(Exception e){
-
-        }
+      
 
         txt_username = (TextView) findViewById(R.id.txt_userName);
         txt_password = (TextView) findViewById(R.id.txt_ps);
 
 
 
-        // enregistre le compte nouvellement cree dans la base de donnees
-        if ( user2 != null){
-            db.add(user2);
-        }
 
-
-
+// D ici vers le choix de Service****************
         Intent i1 = new Intent(MainActivity.this, Activity3.class);
+// D ici vers la creation de compte  *************
         Intent i2 = new Intent( MainActivity.this, Activity2.class);
+// D ici vers la page Administrateur du choix de l action a faire***************
+        Intent i3;
+
+
 
 
         connexion = (Button) findViewById(R.id.btn_connect);
         connexion.setOnClickListener(new View.OnClickListener() {
             public void onClick (View v){
                 try{
-                    User user = db.find(txt_username.getText().toString());
+                    User user = DBHelper.getUser(txt_username.getText().toString(), DB.child("Users"));
                     if (user == null) {
                         Toast.makeText(MainActivity.this, "Compte inexistant, veuillez creer un nouveau compte", Toast.LENGTH_SHORT).show();
                     } else if (user.checkPS(txt_password.getText().toString())) {
-                        i1.putExtra("user_info", user);
-                        startActivity(i1);
+                        DBHelper.addUser(user, DB.child("CurrentUser"));
+                        startActivity(i1);//****************
                     } else {
                         Toast.makeText(MainActivity.this, "Mot de passe incorrect", Toast.LENGTH_SHORT).show();
                     }
