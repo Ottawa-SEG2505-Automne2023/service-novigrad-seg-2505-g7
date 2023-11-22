@@ -2,8 +2,102 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CustomerIDCard">
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="408dp"
+        android:layout_height="85dp"
+        android:background="#673AB7"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Service de Novigrad"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            android:typeface="monospace" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="319dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="50dp"
+        android:text="Choissisez un service"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.236" />
+
+    <Button
+        android:id="@+id/btn_Stationnement"
+        android:layout_width="255dp"
+        android:layout_height="87dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginEnd="110dp"
+        android:background="#673AB7"
+        android:text="Demande de permit de stationnement"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.792" />
+
+    <Button
+        android:id="@+id/btn_ID"
+        android:layout_width="255dp"
+        android:layout_height="82dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginEnd="110dp"
+        android:background="#673AB7"
+        android:text="Demande de carte d'identification"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.6" />
+
+    <Button
+        android:id="@+id/btn_Conduite"
+        android:layout_width="248dp"
+        android:layout_height="95dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginEnd="110dp"
+        android:background="#673AB7"
+        android:text="Demande de permit de conduite"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.399" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
