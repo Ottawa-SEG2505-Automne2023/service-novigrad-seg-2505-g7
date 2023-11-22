@@ -76,9 +76,9 @@ public class MainActivity extends AppCompatActivity {
         txt_password = (TextView) findViewById(R.id.txt_ps);
 
 
-// D ici vers le choix de Service****************
-        Intent i1 = new Intent(MainActivity.this, Activity3.class); // de Gouled
-// D ici vers la creation de compte  *************
+// D ici vers le choix de Service
+        Intent i1 = new Intent(MainActivity.this, CustomerIDCard.class); // de Gouled
+// D ici vers la creation de compte
         Intent i2 = new Intent( MainActivity.this, Activity2.class);
 // D ici vers la page Administrateur du choix de l action a faire
         Intent i3 = new Intent(MainActivity.this, AdminParkingPermit.class);
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(i3);
                         }
                         else if (user.getRole() == "Client"){
-                            // Activite de Gouled *********************
+                            startActivity(i1);
                         }
                         //**************** un atre else if pour l Employee plus tard
                     } else {

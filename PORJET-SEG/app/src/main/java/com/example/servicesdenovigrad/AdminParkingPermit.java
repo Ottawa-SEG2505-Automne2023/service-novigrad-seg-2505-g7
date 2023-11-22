@@ -23,7 +23,6 @@ public class AdminParkingPermit extends AppCompatActivity {
         ajout.setOnClickListener(new View.OnClickListener(){
             public void onClick ( View v){
                 startActivity(new Intent(AdminParkingPermit.this, AdminIDCard.class));
-                //**********A modifier la deuxieme Activite de Gouled Creation de nouveau service
             }
         });
 
