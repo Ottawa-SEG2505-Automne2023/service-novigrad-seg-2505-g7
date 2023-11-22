@@ -22,10 +22,10 @@ public class Activity2 extends AppCompatActivity {
 
         //les  elements remplis par le createur d un compte
 
-        name = findViewById(R.id.txt_Name);
-        role = findViewById(R.id.txt_Role);
-        username = findViewById(R.id.txt_Username);
-        password = findViewById(R.id.txt_Password);
+        name = (EditText) findViewById(R.id.txt_Name);
+        role = (EditText) findViewById(R.id.txt_Role);
+        username = (EditText) findViewById(R.id.txt_Username);
+        password = (EditText) findViewById(R.id.txt_Password);
 
 
 
@@ -47,7 +47,7 @@ public class Activity2 extends AppCompatActivity {
                         i.putExtra("user_info", user);
                     }
                     Toast.makeText(Activity2.this, "Succes de creation de compte", Toast.LENGTH_SHORT).show();
-                    finish();
+                    startActivity(i);
                 }
                 catch( Exception e){
                     Toast.makeText(Activity2.this, "Error", Toast.LENGTH_SHORT).show();

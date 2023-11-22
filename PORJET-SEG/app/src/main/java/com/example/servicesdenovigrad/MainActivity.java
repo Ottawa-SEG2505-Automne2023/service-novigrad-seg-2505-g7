@@ -44,15 +44,17 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+        if ( user2 != null){
+            db.add(user2);
+        }
+
         txt_username = (TextView) findViewById(R.id.txt_userName);
         txt_password = (TextView) findViewById(R.id.txt_ps);
 
 
 
         // enregistre le compte nouvellement cree dans la base de donnees
-        if ( user2 != null){
-            db.add(user2);
-        }
+
 
 
 

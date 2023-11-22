@@ -40,7 +40,7 @@
         android:layout_marginStart="54dp"
         android:layout_marginTop="34dp"
         android:gravity="center"
-        android:text="Service de novigrade"
+        android:text="Service de Novigrade"
         android:textColor="@color/white"
         android:textSize="35sp"
         android:textStyle="bold"
