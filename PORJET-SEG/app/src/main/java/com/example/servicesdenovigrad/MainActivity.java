@@ -29,9 +29,6 @@ public class MainActivity extends AppCompatActivity {
     User currentuser;
 
 
-
-
-
     Button connexion, create;
     TextView txt_username, txt_password;
 
