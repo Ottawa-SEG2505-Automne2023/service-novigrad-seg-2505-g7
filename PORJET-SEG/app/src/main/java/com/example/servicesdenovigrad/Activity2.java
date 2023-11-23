@@ -48,7 +48,7 @@ public class Activity2 extends AppCompatActivity {
         create = (Button) findViewById(R.id.btn_create);
         create.setOnClickListener(new View.OnClickListener() {
             public void onClick( View v){
-                try {
+
                     if (role.getText().toString() == "Administrateur") {
                          user = new Admin(name.getText().toString(), username.getText().toString(), password.getText().toString());
                     } else if (role.getText().toString().equals("Client")) {
@@ -67,11 +67,7 @@ public class Activity2 extends AppCompatActivity {
                     else if (user.getRole() == "Administrateur"){
                         startActivity(i1);
                     }
-                }
-                catch( Exception e){
-                    Toast.makeText(Activity2.this, "Error", Toast.LENGTH_SHORT).show();
-                }
-            }
+                            }
 
         });
 
