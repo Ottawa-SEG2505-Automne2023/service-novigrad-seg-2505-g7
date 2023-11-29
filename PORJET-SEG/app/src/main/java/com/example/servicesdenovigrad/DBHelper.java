@@ -17,6 +17,7 @@ import com.example.servicesdenovigrad.Customer;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -26,13 +27,13 @@ import java.util.Map;
 public class DBHelper  {
 
     public static void addUser(User user, DatabaseReference db){
-        Map<String, String> contentuser = new HashMap<>();
-        contentuser.put("UserName", user.getUsername());
-        contentuser.put("name", user.getName());
-        contentuser.put("password", user.getPassword());
-        contentuser.put("role", user.getRole());
+        Map<String, String> contentUser = new HashMap<>();
+        contentUser.put("UserName", user.getUsername());
+        contentUser.put("name", user.getName());
+        contentUser.put("password", user.getPassword());
+        contentUser.put("role", user.getRole());
 
-        db.child(user.getUsername()).setValue(contentuser);
+        db.child(user.getUsername()).setValue(contentUser);
     }
 
     public static void addService(ServiceNov e, DatabaseReference db){
@@ -78,43 +79,48 @@ public class DBHelper  {
         User[] userlist = new User[1];
 
 
-
-
         db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Map<String, Object> data;
                 for (DataSnapshot dt : snapshot.getChildren()) {
-                    data = dt.getValue(HashMap.class);
-                    if (data.get("UserName") == userName) {
-                        if (data.get("role") == "Administrateur") {
-                            userlist[0] = new Admin(data.get("name").toString(),
-                                    data.get("UserName").toString(),
-                                    data.get("password").toString());
-                        } else if (data.get("role") == "Client") {
-                            userlist[0] = new Customer(data.get("name").toString(),
-                                    data.get("UserName").toString(),
-                                    data.get("password").toString());
-                        } else {
-                            userlist[0] = new Employee(data.get("name").toString(),
-                                    data.get("UserName").toString(),
-                                    data.get("password").toString());
+                    // Use GenericTypeIndicator to properly deserialize HashMap
+                    GenericTypeIndicator<Map<String, Object>> genericTypeIndicator = new GenericTypeIndicator<Map<String, Object>>() {};
+                    Map<String, Object> data = dt.getValue(genericTypeIndicator);
+
+                    if (data != null && data.containsKey("UserName") && data.containsKey("role")) {
+                        if (userName.equals(data.get("UserName"))) {
+                            String role = data.get("role").toString();
+                            if ("Administrateur".equals(role)) {
+                                userlist[0] = new Admin(data.get("name").toString(),
+                                        data.get("UserName").toString(),
+                                        data.get("password").toString());
+                                break; // Exit loop once user is found
+                            } else if ("Client".equals(role)) {
+                                userlist[0] = new Customer(data.get("name").toString(),
+                                        data.get("UserName").toString(),
+                                        data.get("password").toString());
+                                break; // Exit loop once user is found
+                            } else {
+                                userlist[0] = new Employee(data.get("name").toString(),
+                                        data.get("UserName").toString(),
+                                        data.get("password").toString());
+                                break; // Exit loop once user is found
+                            }
                         }
                     }
                 }
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                // Handle onCancelled
             }
         });
+            return userlist[0];
 
-        return userlist[0];
     }
 
-    public static ServiceNov getService(String name, DatabaseReference db){
+            public static ServiceNov getService(String name, DatabaseReference db){
 
         ServiceNov[] servicelist = new ServiceNov[1];
 
@@ -124,7 +130,7 @@ public class DBHelper  {
                 Map<String, Object> data;
                 for (DataSnapshot dt : snapshot.getChildren()){
                     data = dt.getValue(HashMap.class);
-                    if(data.get("ServiceName") == name){
+                    if(data.get("ServiceName") .equals( name)){
                         servicelist[0] = new ServiceNov(data.get("ServiceName").toString(),
                                 data.get("First doc").toString(),
                                 data.get("Second doc").toString(),
@@ -157,11 +163,11 @@ public class DBHelper  {
                 Map<String, Object> data;
                 for (DataSnapshot dt : snapshot.getChildren()) {
                     data = dt.getValue(HashMap.class);
-                    if (data.get("role") == "Administrateur") {
+                    if (data.get("role") .equals( "Administrateur")) {
                         userlist[0] = new Admin(data.get("name").toString(),
                                 data.get("UserName").toString(),
                                 data.get("password").toString());
-                    } else if (data.get("role") == "Client") {
+                    } else if (data.get("role").equals( "Client")) {
                         userlist[0] = new Customer(data.get("name").toString(),
                                 data.get("UserName").toString(),
                                 data.get("password").toString());

@@ -7,16 +7,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         DB = FirebaseDatabase.getInstance().getReference();
 
-        DBHelper.addUser(user1, DB.child("Users"));
+        DBHelper.addUser(user1, DB.child("User"));
 
         //Creation des 3 premiers services et disponibles pour le Client
 
@@ -70,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         user2 = null;
 
         txt_username = (TextView) findViewById(R.id.txt_userName);
-        txt_password = (TextView) findViewById(R.id.txt_ps);
+        txt_password = (TextView) findViewById(R.id.txt_password);
 
 
 // D ici vers le choix de Service
@@ -92,13 +87,13 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Compte inexistant, veuillez creer un nouveau compte", Toast.LENGTH_SHORT).show();
                     } else if (user.checkPS(txt_password.getText().toString())) {
                         DBHelper.addUser(user, DB.child("CurrentUser"));
-                        if (user.getRole() == "Administrateur"){
+                        if ("Administrateur".equals(user.getRole())){
                             startActivity(i3);
                         }
-                        else if (user.getRole() == "Client"){
+                        else if ("Client".equals(user.getRole())){
                             startActivity(i1);
                         }
-                        //**************** un atre else if pour l Employee plus tard
+                        //**************** un autre else if pour l Employee plus tard
                     } else {
                         Toast.makeText(MainActivity.this, "Mot de passe incorrect", Toast.LENGTH_SHORT).show();
                     }
