@@ -1,6 +1,5 @@
 package com.example.servicesdenovigrad; /***********************************************************************
- * https://youtu.be/312RhjfetP8?si=HdSoMO544uq9TdI0
- * ceci est le lien de la video duquel je me suis inspire pour ecrire ce code
+ *
  */
 
 
@@ -26,7 +25,7 @@ import java.util.Map;
 public class DBHelper  {
 
     public static void addUser(User user, DatabaseReference db){
-        Map<String, String> contentuser = new HashMap<>();
+        Map<String, Object> contentuser = new HashMap<>();
         contentuser.put("UserName", user.getUsername());
         contentuser.put("name", user.getName());
         contentuser.put("password", user.getPassword());
@@ -183,7 +182,7 @@ public class DBHelper  {
     }
 
     public static void create_Serv_User(User user, ServiceNov e, DatabaseReference db){
-        Map<String, String> content = new HashMap<>();
+        Map<String, Object> content = new HashMap<>();
         content.put("ServiceName", e.getName());
         content.put("FullName", e.getFullname());
         content.put("Adresse", e.getAddress());
