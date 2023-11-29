@@ -76,6 +76,7 @@ public class CustomerDriverLicense extends AppCompatActivity {
                 custS.setPhone(phone.getText().toString());
 
                 currentU.addService(custS);
+                DBHelper.create_Serv_User(currentU, custS, FirebaseDatabase.getInstance().getReference().child("Users"));
                 Toast.makeText(CustomerDriverLicense.this, "Thanks, Service request received", Toast.LENGTH_SHORT).show();
                 finish();
             }

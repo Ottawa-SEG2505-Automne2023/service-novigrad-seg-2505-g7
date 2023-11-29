@@ -53,11 +53,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="7dp"
         android:layout_marginTop="206dp"
-        android:background="@drawable/custom_edit_text"
+
         android:ems="10"
+        android:hint="Nom et prénom"
         android:inputType="text"
-        android:minHeight="48dp"
-        android:text="Noms et prénoms:" />
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/txt_address"
@@ -68,11 +68,10 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="5dp"
         android:layout_marginTop="255dp"
-        android:background="@drawable/custom_edit_text"
         android:ems="10"
+        android:hint="Adresse"
         android:inputType="text"
-        android:minHeight="48dp"
-        android:text="adresse:" />
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/txt_email"
@@ -83,11 +82,10 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="3dp"
         android:layout_marginTop="302dp"
-        android:background="@drawable/custom_edit_text"
         android:ems="10"
+        android:hint="Email"
         android:inputType="text"
-        android:minHeight="48dp"
-        android:text="Email:" />
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/txt_num"
@@ -98,11 +96,10 @@
         android:layout_centerInParent="true"
         android:layout_marginStart="3dp"
         android:layout_marginBottom="330dp"
-        android:background="@drawable/custom_edit_text"
         android:ems="10"
+        android:hint="Telephone"
         android:inputType="text"
-        android:minHeight="48dp"
-        android:text="Numéro de téléphone:" />
+        android:minHeight="48dp" />
 
     <TextView
         android:id="@+id/textView9"
