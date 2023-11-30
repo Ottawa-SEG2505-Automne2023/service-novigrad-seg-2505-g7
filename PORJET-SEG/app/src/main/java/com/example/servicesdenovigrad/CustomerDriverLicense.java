@@ -53,15 +53,10 @@ public class CustomerDriverLicense extends AppCompatActivity {
         email = findViewById(R.id.txt_email);
         phone = findViewById(R.id.txt_num);
 
-        if (Snumber == 1){
-            currentS = DBHelper.getService("Demande de permis de conduire", DB);
-        }
-        else if (Snumber == 2){
-            currentS = DBHelper.getService("Demande de Carte ID", DB);
-        }
-        else{
-            currentS = DBHelper.getService("Demande de permis de parking", DB);
-        }
+
+        currentS = DBHelper.getService(Integer.toString(Snumber), DB);
+
+
 
         custS = new ServiceNov ( currentS.getName(), currentS.getFirstD(), currentS.getSecondD(), currentS.getThirdD());
 
@@ -76,7 +71,7 @@ public class CustomerDriverLicense extends AppCompatActivity {
                 custS.setPhone(phone.getText().toString());
 
                 currentU.addService(custS);
-                DBHelper.create_Serv_User(currentU, custS, FirebaseDatabase.getInstance().getReference().child("Users"));
+                //la ligne a ajouter comment enregistrer la demande d un service d un client on pourra mettre une autre classe enregistrant les demandes pour la succ
                 Toast.makeText(CustomerDriverLicense.this, "Thanks, Service request received", Toast.LENGTH_SHORT).show();
                 finish();
             }

@@ -47,27 +47,32 @@ public class Activity2 extends AppCompatActivity {
 // a l appui du bouton create, si les informations sont toutes remplies, une nouvel utilisateur est cree et envoye dans la base des donnees de la MainActivity
         create = (Button) findViewById(R.id.btn_create);
         create.setOnClickListener(new View.OnClickListener() {
-            public void onClick( View v){
+            public void onClick( View v) {
 
-                    if (role.getText().toString() == "Administrateur") {
-                         user = new Admin(name.getText().toString(), username.getText().toString(), password.getText().toString());
+                try {
+
+                    if (role.getText().toString().equals("Administrateur")) {
+                        user = new Admin(name.getText().toString(), username.getText().toString(), password.getText().toString());
                     } else if (role.getText().toString().equals("Client")) {
-                         user = new Customer(name.getText().toString(), username.getText().toString(), password.getText().toString());
-                        
-                    } else {
-                         user = new Employee(name.getText().toString(), username.getText().toString(), password.getText().toString());
+                        user = new Customer(name.getText().toString(), username.getText().toString(), password.getText().toString());
+
+                    } else if (role.getText().toString().equals("Employee")) {
+                        user = new Employee(name.getText().toString(), username.getText().toString(), password.getText().toString());
                     }
                     DBHelper.addUser(user, DB.child("Users"));
-                    DBHelper.addUser(user, DB.child("CurrentUser"));
+                    DB.child("CurrentUser").setValue(user);
 
                     Toast.makeText(Activity2.this, "Succes de creation de compte", Toast.LENGTH_SHORT).show();
-                    if (user.getRole() == "Client") {
+                    if (user.getRole().equals("Client")) {
                         startActivity(i);
-                    }
-                    else if (user.getRole() == "Administrateur"){
+                    } else if (user.getRole().equals("Administrateur")) {
                         startActivity(i1);
                     }
-                            }
+                    // else vers l activite de configuration de succursale
+                } catch (Exception e) {
+                    Toast.makeText(Activity2.this, "Erreur, champs de texte non valide", Toast.LENGTH_SHORT).show();
+                }
+            }
 
         });
 

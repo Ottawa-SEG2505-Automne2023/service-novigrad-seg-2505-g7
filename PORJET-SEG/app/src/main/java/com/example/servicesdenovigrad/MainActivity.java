@@ -86,22 +86,26 @@ public class MainActivity extends AppCompatActivity {
         connexion = (Button) findViewById(R.id.btn_connect);
         connexion.setOnClickListener(new View.OnClickListener() {
             public void onClick (View v){
+                try {
 
                     User user = DBHelper.getUser(txt_username.getText().toString(), DB.child("Users"));
                     if (user == null) {
                         Toast.makeText(MainActivity.this, "Compte inexistant, veuillez creer un nouveau compte", Toast.LENGTH_SHORT).show();
                     } else if (user.checkPS(txt_password.getText().toString())) {
-                        DBHelper.addUser(user, DB.child("CurrentUser"));
-                        if (user.getRole() == "Administrateur"){
+                        DB.child("CurrentUser").setValue(user);
+                        if (user.getRole() == "Administrateur") {
                             startActivity(i3);
-                        }
-                        else if (user.getRole() == "Client"){
+                        } else if (user.getRole() == "Client") {
                             startActivity(i1);
                         }
                         //**************** un atre else if pour l Employee plus tard
                     } else {
                         Toast.makeText(MainActivity.this, "Mot de passe incorrect", Toast.LENGTH_SHORT).show();
                     }
+                }
+                catch( Exception e){
+                    Toast.makeText(MainActivity.this, "Erreur, champs de texte mal rempli", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });

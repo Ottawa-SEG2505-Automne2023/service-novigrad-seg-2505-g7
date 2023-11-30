@@ -14,6 +14,10 @@ public class Customer extends User{
         list_serv = new ArrayList<>();
     }
 
+    public ArrayList<ServiceNov> getList_serv(){
+        return list_serv;
+    }
+
     private ArrayList<ServiceNov> list_serv;
 
     public void addService(ServiceNov serv){
