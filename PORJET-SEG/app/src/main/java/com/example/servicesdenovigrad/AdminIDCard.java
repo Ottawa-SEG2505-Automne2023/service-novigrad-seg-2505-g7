@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+// Activite de creation de nouveau service par l admin
 public class AdminIDCard extends AppCompatActivity {
 
     private DatabaseReference DB;
