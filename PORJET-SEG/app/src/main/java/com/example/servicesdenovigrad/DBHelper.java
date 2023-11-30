@@ -131,4 +131,27 @@ public class DBHelper  {
 
         db.child(user.getUsername()).child(e.getId()).setValue(e);
     }
+
+    public static Succursale getSuccursale(String empl_un, DatabaseReference db){
+
+        final Succursale[] data = new Succursale[1];
+
+        db.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dt : snapshot){
+                    data[0] = dt.getValue(Succursale.class);
+                    if (data[0].getEmpl_un() == empl_un){
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+            return data[0];
+        });
+    }
 }

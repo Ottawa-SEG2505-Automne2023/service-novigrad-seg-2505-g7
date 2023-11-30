@@ -13,6 +13,9 @@
         android:theme="@style/Theme.ServicesDeNovigrad"
         tools:targetApi="31">
         <activity
+            android:name=".ConfigSucc"
+            android:exported="false" />
+        <activity
             android:name=".AdminParkingPermit"
             android:exported="false" />
         <activity

@@ -50,7 +50,19 @@
         android:layout_marginStart="-2dp"
         android:layout_marginEnd="2dp"
         android:layout_marginBottom="313dp"
-        android:text="@string/entrez_le_nom_du_service_supprimer"
+        android:text="Veuillez entrez l'id du service à supprimer"
         android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/btn_del"
+        android:layout_width="160dp"
+        android:layout_height="84dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="21dp"
+        android:layout_marginEnd="231dp"
+        android:layout_marginBottom="202dp"
+        android:text="Supprimer" />
 
 </RelativeLayout>
