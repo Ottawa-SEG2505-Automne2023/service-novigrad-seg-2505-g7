@@ -18,6 +18,12 @@ public class Succursale {
 
     private String empl_un;
 
+    private String num_street_postal;
+
+    private String city;
+
+    private String businessH;
+
     private Map<String, ServiceNov> serv_disp;
 
 
@@ -43,5 +49,29 @@ public class Succursale {
             return true;
         }
         return false;
+    }
+
+    public String getNum_street_postal() {
+        return num_street_postal;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setNum_street_postal(String num, String street, String postal) {
+        num_street_postal = num+" "+street+" "+postal;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getBusinessH(){
+        return businessH;
+    }
+
+    public void setBusinessH(String start, String end){
+        businessH = start + " à "+ end;
     }
 }

@@ -10,4 +10,5 @@
     <string name="entrez_le_nom_du_service_supprimer">Entrez le nom du service à supprimer.</string>
     <string name="Service_Novigrad">Service Novigrad</string>
     <string name="nom_service" />
+    <string name="configSucc">Service Novigrad\nConfiguration de succursale</string>
 </resources>
