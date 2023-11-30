@@ -37,9 +37,8 @@ public class AdminDriverLicense extends AppCompatActivity {
                 // je verifie l existence du service donne
                 try {
                     if (DBHelper.getService(Sname.getText().toString(), DB.child("Services")) == null) {
-                        Toast.makeText(AdminDriverLicense.this, "Service inexistant ou mal ecrit", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AdminDriverLicense.this, "Service inexistant ou id non valide", Toast.LENGTH_SHORT).show();
                     } else {
-                        md.setServ_name(Sname.getText().toString());
                         if (md.getAct() == 0) {//on renvoie a l activite de modification d un service existant
                             Intent imd = new Intent(AdminDriverLicense.this, CustomerParkingPermit.class);
                             imd.putExtra("Modificator", md);

@@ -68,6 +68,7 @@ public class Activity2 extends AppCompatActivity {
                     } else if (user.getRole().equals("Administrateur")) {
                         startActivity(i1);
                     }
+                    // else vers l activite de configuration de succursale
                 } catch (Exception e) {
                     Toast.makeText(Activity2.this, "Erreur, champs de texte non valide", Toast.LENGTH_SHORT).show();
                 }
