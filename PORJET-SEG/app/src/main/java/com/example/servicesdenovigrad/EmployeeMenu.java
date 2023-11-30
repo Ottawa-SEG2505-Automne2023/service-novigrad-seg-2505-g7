@@ -2,6 +2,7 @@ package com.example.servicesdenovigrad;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,14 +17,14 @@ public class EmployeeMenu extends AppCompatActivity {
     Button Configurer;
     Button Voir;
     TextView faire;
-    private DatabaseReference DB;
+
+    Intent i1 = new Intent(EmployeeMenu.this, ConfigSucc.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.employeemenu);
 
-        DB = FirebaseDatabase.getInstance().getReference();
 
         Configurer = (Button) findViewById(R.id.btn_Configurer);
         Voir = (Button) findViewById(R.id.btn_Voir);
@@ -31,16 +32,15 @@ public class EmployeeMenu extends AppCompatActivity {
         Configurer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(i1);
             }
-
 
         });
 
         Voir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+//****************************************************************************
             }
         });
 

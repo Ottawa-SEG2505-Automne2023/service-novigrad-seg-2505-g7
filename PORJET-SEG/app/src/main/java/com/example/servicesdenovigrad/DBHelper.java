@@ -45,43 +45,42 @@ public class DBHelper  {
 
     public static User getUser(String userName, DatabaseReference db) {
 
-        User[] userlist = new User[1];
-
-        final User[] data = new User[1];
+         User data;
 
 
-        db.addValueEventListener(new ValueEventListener() {
+        ValueEventListener valueEventListener = db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dt : snapshot.getChildren()) {
-                    data[0] = dt.getValue(User.class);
-                    if ( data[0].getUsername() == userName){
+                    data = dt.getValue(User.class);
+                    if (data.getUsername() == userName) {
                         break;
 
                     }
                 }
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 // Handle onCancelled
             }
-            return data[0];
+            return data;
         });
-           
+
 
     }
 
     public static ServiceNov getService(String id, DatabaseReference db){
 
-        ServiceNov[] data = new ServiceNov[1];
+        ServiceNov list;
 
-        db.addValueEventListener(new ValueEventListener() {
+        ValueEventListener valueEventListener = db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dt : snapshot.getChildren()){
-                    data[0] = dt.getValue(ServiceNov.class);
-                    if ( data[0].getId() == id){
+                for (DataSnapshot dt : snapshot.getChildren()) {
+                    list = dt.getValue(ServiceNov.class);
+                    if (list.getId() == id) {
                         break;
                     }
                 }
@@ -92,7 +91,7 @@ public class DBHelper  {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-            return data[0];
+            return list;
         });
 
     }
@@ -104,24 +103,25 @@ public class DBHelper  {
 
     public static User getCurrentUser(DatabaseReference db){
 
-        User[] data = new User[1];
+        User data;
 
-        db.addValueEventListener(new ValueEventListener() {
+        ValueEventListener valueEventListener = db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dt : snapshot.getChildren()) {
-                    data[0] = dt.getValue(User.class);
+                    data = dt.getValue(User.class);
                     break;
                 }
 
             }
+            return data;
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
 
-            return data[0];
+
         });
 
 
@@ -130,5 +130,28 @@ public class DBHelper  {
     public static void create_Serv_User(User user, ServiceNov e, DatabaseReference db){
 
         db.child(user.getUsername()).child(e.getId()).setValue(e);
+    }
+
+    public static Succursale getSuccursale(String empl_un, DatabaseReference db){
+
+         Succursale data;
+
+        db.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dt : snapshot){
+                    data = dt.getValue(Succursale.class);
+                    if (data.getEmpl_un() == empl_un){
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+            return data;
+        });
     }
 }
