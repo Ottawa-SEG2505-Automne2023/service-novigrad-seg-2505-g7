@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Services de Novigrad</string>
+    <string name="Configurer_la_sucursale" />
+    <string name="Configurer" />
+    <string name="service_novigrad">Service Novigrad</string>
+    <string name="que_voulez_vous_faire_aujourd_hui">Que voulez-vous faire aujourd\'hui ?</string>
+    <string name="voir_les_demandes_de_services">Voir les demandes de services</string>
+    <string name="configurer_la_sucursale">Configurer la sucursale</string>
+    <string name="name">Name</string>
+    <string name="entrez_le_nom_du_service_supprimer">Entrez le nom du service à supprimer.</string>
+    <string name="Service_Novigrad">Service Novigrad</string>
+    <string name="nom_service" />
 </resources>
