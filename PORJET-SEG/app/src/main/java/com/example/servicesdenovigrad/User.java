@@ -23,6 +23,10 @@ public  class User implements Parcelable {
         this.password = password;
     }
 
+    public User(){
+
+    }
+
 
 
     // Parcelable implementation
