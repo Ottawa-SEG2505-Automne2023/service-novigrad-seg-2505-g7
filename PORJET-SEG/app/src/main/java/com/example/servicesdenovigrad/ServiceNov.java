@@ -2,6 +2,10 @@ package com.example.servicesdenovigrad;
 
 public class ServiceNov {
 
+    //ID des services qui s incremente a chaque creation
+
+    static int P_id = 1;
+
     // les attributs que le client peut remplir
 
     private String Fullname;
@@ -10,6 +14,8 @@ public class ServiceNov {
     private String Phone;
 
     // les attributs des documents requis et du nom du service  modifiables par l
+
+    private int id;
 
     private String Name;
 
@@ -61,14 +67,24 @@ public class ServiceNov {
         return Name;
     }
 
+    public String getId(){
+        return Integer.toString(this.id);
+    }
+
     // le constructeur pour créer un service
 
 
     public ServiceNov(String name, String firstD, String secondD, String thirdD) {
+        id = P_id;
         Name = name;
         FirstD = firstD;
         SecondD = secondD;
         ThirdD = thirdD;
+        P_id++;
+    }
+
+    public ServiceNov(){
+
     }
 
     public void setFullname(String fullname) {
