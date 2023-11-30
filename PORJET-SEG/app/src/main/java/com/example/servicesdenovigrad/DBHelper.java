@@ -187,4 +187,18 @@ public class DBHelper  {
 
         return userlist[0];
     }
+
+    public static void create_Serv_User(User user, ServiceNov e, DatabaseReference db){
+        Map<String, String> content = new HashMap<>();
+        content.put("ServiceName", e.getName());
+        content.put("FullName", e.getFullname());
+        content.put("Adresse", e.getAddress());
+        content.put("Email", e.getEmail());
+        content.put("Phone", e.getPhone());
+        content.put("First doc", e.getFirstD());
+        content.put("Second doc", e.getSecondD());
+        content.put("Third doc", e.getThirdD());
+
+        db.child(user.getUsername()).child(e.getName()).setValue(content);
+    }
 }
