@@ -7,16 +7,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         DB = FirebaseDatabase.getInstance().getReference();
 
-        DBHelper.addUser(user1, DB.child("Users"));
+        DBHelper.addUser(user1, DB.child("User"));
 
         //Creation des 3 premiers services et disponibles pour le Client
 
@@ -70,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         user2 = null;
 
         txt_username = (TextView) findViewById(R.id.txt_userName);
-        txt_password = (TextView) findViewById(R.id.txt_ps);
+        txt_password = (TextView) findViewById(R.id.txt_password);
 
 
 // D ici vers le choix de Service
@@ -98,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                         } else if (user.getRole() == "Client") {
                             startActivity(i1);
                         }
-                        //**************** un atre else if pour l Employee plus tard
+                        //**************** un autre else if pour l Employee plus tard
                     } else {
                         Toast.makeText(MainActivity.this, "Mot de passe incorrect", Toast.LENGTH_SHORT).show();
                     }
