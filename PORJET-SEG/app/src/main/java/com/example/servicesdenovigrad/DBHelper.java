@@ -16,6 +16,7 @@ import com.example.servicesdenovigrad.Customer;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -50,8 +51,6 @@ public class DBHelper  {
         final User[] data = new User[1];
 
 
-
-
         db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -59,16 +58,18 @@ public class DBHelper  {
                     data[0] = dt.getValue(User.class);
                     if ( data[0].getUsername() == userName){
                         break;
+
                     }
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                // Handle onCancelled
             }
             return data[0];
         });
+           
 
     }
 
