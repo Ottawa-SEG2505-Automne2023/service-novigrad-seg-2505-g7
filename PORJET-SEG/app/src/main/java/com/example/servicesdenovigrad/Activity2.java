@@ -51,25 +51,25 @@ public class Activity2 extends AppCompatActivity {
 
                 try {
 
-                    if (role.getText().toString() == "Administrateur") {
+                    if (role.getText().toString().equals("Administrateur")) {
                         user = new Admin(name.getText().toString(), username.getText().toString(), password.getText().toString());
                     } else if (role.getText().toString().equals("Client")) {
                         user = new Customer(name.getText().toString(), username.getText().toString(), password.getText().toString());
 
-                    } else if (role.getText().toString() == "Employee") {
+                    } else if (role.getText().toString().equals("Employee")) {
                         user = new Employee(name.getText().toString(), username.getText().toString(), password.getText().toString());
                     }
                     DBHelper.addUser(user, DB.child("Users"));
-                    DBHelper.addUser(user, DB.child("CurrentUser"));
+                    DB.child("CurrentUser").setValue(user);
 
                     Toast.makeText(Activity2.this, "Succes de creation de compte", Toast.LENGTH_SHORT).show();
-                    if (user.getRole() == "Client") {
+                    if (user.getRole().equals("Client")) {
                         startActivity(i);
-                    } else if (user.getRole() == "Administrateur") {
+                    } else if (user.getRole().equals("Administrateur")) {
                         startActivity(i1);
                     }
                 } catch (Exception e) {
-                    Toast.makeText(Activity2.this, "Error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Activity2.this, "Erreur, champs de texte non valide", Toast.LENGTH_SHORT).show();
                 }
             }
 
