@@ -74,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
         Intent i2 = new Intent( MainActivity.this, Activity2.class);
 // D ici vers la page Administrateur du choix de l action a faire
         Intent i3 = new Intent(MainActivity.this, AdminParkingPermit.class);
+// D ici vers la pade d acceuil de l employe
+        Intent i4 = new Intent(MainActivity.this, EmployeeMenu.class);
 
 
 
@@ -93,13 +95,15 @@ public class MainActivity extends AppCompatActivity {
                         } else if (user.getRole() == "Client") {
                             startActivity(i1);
                         }
-                        //**************** un autre else if pour l Employee plus tard
+                        else if (user.getRole() == "Employee"){
+                            startActivity(i4);
+                        }
                     } else {
                         Toast.makeText(MainActivity.this, "Mot de passe incorrect", Toast.LENGTH_SHORT).show();
                     }
                 }
                 catch( Exception e){
-                    Toast.makeText(MainActivity.this, "Erreur, champs de texte mal rempli", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Erreur, champs de texte non valide", Toast.LENGTH_SHORT).show();
                 }
 
             }
