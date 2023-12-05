@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/btn_ajoutPermitDeConduite"
+        android:id="@+id/btn_s1"
         style="@style/Widget.AppCompat.Button"
         android:layout_width="205dp"
         android:layout_height="87dp"
@@ -19,7 +19,7 @@
         app:layout_constraintVertical_bias="0.398" />
 
     <Button
-        android:id="@+id/btn_ajoutCarteID"
+        android:id="@+id/btn_s2"
         style="@style/Widget.AppCompat.Button"
         android:layout_width="204dp"
         android:layout_height="74dp"
@@ -31,7 +31,7 @@
         app:layout_constraintVertical_bias="0.612" />
 
     <Button
-        android:id="@+id/btn_ajoutPermitStationnement"
+        android:id="@+id/btn_s3"
         style="@style/Widget.AppCompat.Button"
         android:layout_width="204dp"
         android:layout_height="89dp"
@@ -55,5 +55,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.137" />
+
+    <Button
+        android:id="@+id/btn_done"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Terminer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_s3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

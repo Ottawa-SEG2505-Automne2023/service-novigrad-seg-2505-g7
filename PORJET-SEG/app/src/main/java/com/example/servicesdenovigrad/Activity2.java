@@ -40,6 +40,7 @@ public class Activity2 extends AppCompatActivity {
 
         Intent i = new Intent ( Activity2.this, CustomerIDCard.class); // *******de Gouled choix de service client
         Intent i1 = new Intent ( Activity2.this, AdminParkingPermit.class);
+        Intent i2 = new Intent(Activity2.this, EmployeeMenu.class); // vers le menu de l employee de la succursale
 
 
 
@@ -68,7 +69,10 @@ public class Activity2 extends AppCompatActivity {
                     } else if (user.getRole().equals("Administrateur")) {
                         startActivity(i1);
                     }
-                    // else vers l activite de configuration de succursale
+                    else if (user.getRole().equals("Employee")){
+                        startActivity(i2);
+                    }// else vers l activite de configuration de succursale
+
                 } catch (Exception e) {
                     Toast.makeText(Activity2.this, "Erreur, champs de texte non valide", Toast.LENGTH_SHORT).show();
                 }
